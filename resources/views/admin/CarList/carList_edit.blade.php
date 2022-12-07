@@ -45,17 +45,6 @@
                 <label for="car_model" class="form-label">car_model</label>
                 <input  value="{{(isset($carList)) ? $carList->car_model : '' }}" type="text" name="car_model"  class="form-control" id="car_model" placeholder="car_model">
             </div>
-
-            <div class="mb-3">
-                <label for="car_years" class="form-label">car_years</label>
-                <input  value="{{(isset($carList)) ? $carList->car_years : '' }}" type="text" name="car_years"  class="form-control" id="car_years" placeholder="car_years">
-            </div>
-
-            <div class="mb-3">
-                <label for="car_Engine_capacity" class="form-label">car_Engine_capacity</label>
-                <input  value="{{(isset($carList)) ? $carList->car_Engine_capacity : '' }}" type="text" name="car_Engine_capacity"  class="form-control" id="car_Engine_capacity" placeholder="car_Engine_capacity">
-            </div>
-
             @if(isset($carList))
                 <button class="btn btn-primary">
                     Update

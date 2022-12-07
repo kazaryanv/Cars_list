@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CarsController;
-use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 require ("auth.php");
 
@@ -24,13 +24,13 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'home',  'middleware' => 'auth'], function()
 {
-    Route::resource("/posts", PostController::class);
+    Route::resource("/posts/cars", CarsController::class);
 
 });
 
 Route::group(['prefix' => 'admin',  'middleware' => 'admin'], function()
 {
-    Route::resource("/carList", CarsController::class);
+    Route::resource("/carList", AdminController::class);
 });
 
 //Route::get("/admin", function(){

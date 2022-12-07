@@ -15,14 +15,15 @@ return new class extends Migration
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
-            $table->string('logo')->nullable();
-            $table->string('car_brand')->nullable();
-            $table->string('car_model')->nullable();
-            $table->integer('car_years')->nullable();
-            $table->string('car_Engine_capacity')->nullable();
-            $table->string('car_Transmission')->nullable();
-            $table->unsignedBigInteger('post_id')->nullable();
-            $table->foreign('post_id')->references('id')->on('posts');
+            $table->json('logo');
+            $table->string('car_brand');
+            $table->string('car_model');
+            $table->string('car_years');
+            $table->string('car_Engine_capacity');
+            $table->string('car_Transmission');
+            $table->string('content');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

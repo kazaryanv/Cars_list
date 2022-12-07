@@ -21,8 +21,8 @@ class AuthController extends Controller
         if(Auth::attempt($user_data)) {
             if ($this->middleware('admin')->only('role' == 1)){
                 return redirect()->route('carList.index');
-            }else if ($this->middleware('admin')->only('role' == NULL)){
-                return redirect()->route('posts.index');
+            }else if ($this->middleware('admin')->only('role' == null)){
+                return redirect()->route('cars.index');
             }
         } else {
             return redirect()->back()->withErrors(['validation' => 'We need to know your email address and password!']);

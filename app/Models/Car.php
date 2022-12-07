@@ -15,11 +15,20 @@ class Car extends Model
         'car_years',
         'car_Engine_capacity',
         'car_Transmission',
-        'post_id'
+        'content',
+        'user_id',
     ];
 
-    public function Post()
+    protected $casts = [
+        'logo' => 'json'
+    ];
+
+    public function User()
     {
-        return $this->belongsTo(Post::class);
+        return $this->belongsTo(User::class);
+    }
+    public function Brand()
+    {
+        return $this->belongsTo(Brand::class);
     }
 }

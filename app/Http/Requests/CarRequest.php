@@ -13,7 +13,7 @@ class CarRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,7 @@ class CarRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'logo' => 'required|min:1,max:10'
         ];
     }
 }
