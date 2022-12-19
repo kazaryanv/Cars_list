@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('layouts.admin_lay')
 @section('title')
     @if(isset($carList))
         Edit Car

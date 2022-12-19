@@ -6,7 +6,7 @@
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <a href="{{route('cars.index')}}">Back</a>
+                <a href="{{route('myPosts')}}">Back</a>
                     <div>Image CAR`
                        @foreach($car->logo as $image) <img class="col" style="width: 50px;height: 50px; border-radius: 50%" src="{{asset('storage/' . $image )}}">@endforeach
                     </div>
@@ -19,7 +19,11 @@
                     @csrf
                     <button type="submit" class="btn btn-outline-primary">Edit</button>
                 </form>
-
+                <form class="d-inline" action="{{ route('cars.destroy', $car->id) }}" method="post">
+                    @csrf
+                    @method('delete')
+                    <button class="btn btn-outline-danger">Delete</button>
+                </form>
             </div>
         </div>
     </div>

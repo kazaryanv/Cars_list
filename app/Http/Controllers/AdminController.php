@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AdminRequest;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -23,7 +24,7 @@ class AdminController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(AdminRequest $request)
     {
             $path =$request->file('logo')->store('logo', 'public');
             $store = Brand::create([
@@ -53,7 +54,7 @@ class AdminController extends Controller
     }
 
 
-    public function update(Request $request, $id)
+    public function update(AdminRequest $request, $id)
     {
         $cars = Brand::query()->findOrFail($id);
         $cars->car_brand = $request->input('logo');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CarRequest;
 use App\Models\Car;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -17,8 +18,8 @@ class CarsController extends Controller
      */
     public function index()
     {
-        $posts = Car::all();
-        return view("Auth.home",compact('posts'));
+        $cars = Car::all();
+        return view("Auth.home", compact('cars'));
     }
 
     /**
@@ -40,12 +41,13 @@ class CarsController extends Controller
      */
     public function store(CarRequest $request)
     {
+
         $paths = [];
         if ($request->hasFile('logo')) {
             foreach ($request->file('logo') as $index => $item) {
                 $paths[]= $request->logo[$index]->store('post','public');
             }
-            $userId = Auth::check() ? Auth::id() : true;
+            $userId = Auth::check() ? Auth::id() : abort(404);
             $store = Car::create([
                 'user_id' => $userId,
                 'logo' => $paths,
@@ -54,6 +56,7 @@ class CarsController extends Controller
                 'car_years' => $request->car_years,
                 'car_Engine_capacity' => $request->car_Engine_capacity,
                 'car_Transmission' => $request->car_Transmission,
+                'many'=>$request->many,
                 'content' => $request['content'],
             ]);
             if ($store) {
@@ -95,7 +98,7 @@ class CarsController extends Controller
      * @param  \App\Models\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(CarRequest $request,$id)
     {
         $cars = Car::query()->findOrFail($id);
         $cars->car_brand = $request->input('logo[]');
@@ -106,7 +109,10 @@ class CarsController extends Controller
 
         if ($request->hasfile('logo')) {
             if ($logo = $cars->logo) {
-                Storage::disk('public')->delete($logo);
+                foreach ($logo as $index) {
+                    $file_path = public_path('storage/'. $index);
+                    unlink($file_path);
+                }
             }
             $paths = [];
             if ($request->hasFile('logo')) {

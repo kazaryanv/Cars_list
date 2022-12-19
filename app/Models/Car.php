@@ -15,6 +15,7 @@ class Car extends Model
         'car_years',
         'car_Engine_capacity',
         'car_Transmission',
+        'many',
         'content',
         'user_id',
     ];
@@ -30,5 +31,9 @@ class Car extends Model
     public function Brand()
     {
         return $this->belongsTo(Brand::class);
+    }
+    public function Guest()
+    {
+        return $this->belongsTo(Guest::class);
     }
 }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AuthRequest;
 use App\Http\Requests\LoginRequest;
-use App\Models\CarList;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,13 +36,19 @@ class AuthController extends Controller
     public function register(AuthRequest $request) {
         $data = $request->all();
         $check = $this->create_user($data);
-
-        return redirect()
-            ->route('login-view')
-            ->with("success", "User successfully created!");
-
-
-
+        if ($check){
+        $user_data = $request->only(['email', 'password']);
+        if(Auth::attempt($user_data)) {
+        if ($this->middleware('admin')->only('role' == 1)){
+            return redirect()->route('carList.index');
+        }else if ($this->middleware('admin')->only('role' == null)){
+            return redirect()->route('cars.index');
+        }
+        }
+        }
+//        return redirect()
+//            ->route('login-view')
+//            ->with("success", "User successfully created!");
     }
 
     public function create_user(array $data) {
@@ -59,6 +64,6 @@ class AuthController extends Controller
 
     public function  logout() {
         Auth::logout();
-        return redirect()->route('login-view');
+        return redirect()->route('welcome');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use http\Message;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CarRequest extends FormRequest
@@ -24,7 +25,18 @@ class CarRequest extends FormRequest
     public function rules()
     {
         return [
-            'logo' => 'required|min:1,max:10'
+            'logo' => 'max:10|min:2|required',
+            'car_brand' => 'required',
+            'car_model' => 'required',
+            'many' => 'required',
+        ];
+
+    }
+    public function messages()
+    {
+        return [
+            "logo.max" => "file can't be more than 10.",
+            "logo.min" => "file can't be more than 2.",
         ];
     }
 }
