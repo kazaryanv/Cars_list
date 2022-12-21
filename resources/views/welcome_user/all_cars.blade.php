@@ -152,15 +152,22 @@
                     <span class="glyphicon glyphicon-th-list"></span>Список</a>
                 <a href="#" id="grid" class="btn btn-default btn-sm">
                     <span class="glyphicon glyphicon-th"></span>Сетка</a>
-{{--                @foreach($guest as $row)--}}
-{{--                <a href="#" id="grid" class="btn btn-default btn-sm ">--}}
-{{--                    <span class="glyphicon glyphicon-th sorting_car"></span>{{$row->car_brand}}</a>--}}
-{{--                @endforeach--}}
             </div>
         </div>
             <h2>Filterable Table</h2>
             <input class="form-control" id="myInput" type="text" placeholder="Search..">
             <br>
+
+
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="exampleCheck1" value="BMW">
+            <label class="form-check-label" for="exampleCheck1">Default BMW</label>
+        </div>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="exampleCheck2" value="Jaguar">
+            <label class="form-check-label" id="exampleCheck2">Checked Jaguar</label>
+        </div>
+
         <div id="products" class="row list-group d-flex justify-content-center align-items-center flex-wrap">
             <div class="item col-xs-4 col-lg-4">
                 @if(isset($guest))
@@ -190,7 +197,23 @@
     <script>
         $(document).ready(function(){
             $("#myInput").on("keyup", function() {
-                var value = $(this).val().toLowerCase();
+                let value = $(this).val().toLowerCase();
+                $("#myTable ").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+        $(document).ready(function(){
+            $('#exampleCheck1').on("keyup", function() {
+                let value = $(this).val().toLowerCase();
+                $("#myTable ").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+        $(document).ready(function(){
+            $("#exampleCheck2").on("keyup", function() {
+                let value = $(this).val().toLowerCase();
                 $("#myTable ").filter(function() {
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                 });
