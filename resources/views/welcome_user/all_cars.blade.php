@@ -164,7 +164,7 @@
             <label class="form-check-label" for="exampleCheck1">Default BMW</label>
         </div>
         <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="exampleCheck2" value="Jaguar">
+            <input class="form-check-input" type="checkbox" id="exampleCheck2" @if() value="Jaguar" @endif>
             <label class="form-check-label" id="exampleCheck2">Checked Jaguar</label>
         </div>
 
@@ -216,6 +216,9 @@
                 let value = $(this).val().toLowerCase();
                 $("#myTable ").filter(function() {
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    if($("#exampleCheck2").value['0']){
+                        alert('ok')
+                    }
                 });
             });
         });

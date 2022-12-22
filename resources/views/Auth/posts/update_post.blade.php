@@ -1,10 +1,16 @@
-@extends('layouts.default')
+@extends('layouts.admin_lay')
 @section('title')
     @if(isset($car))
         Edit Cars
     @else
         New Cars
     @endif
+@endsection
+@section('my_post')
+    {{route('myPosts')}}
+@endsection
+@section('my_poisk')
+    MY POST
 @endsection
 @section('content')
 
@@ -31,7 +37,7 @@
             <div class="mb-3">
                 <label for="logo" class="form-label">logo post</label>
                 @if(isset($cars))
-                    <img class="col" style="width: 50px;height: 50px; border-radius: 50%;margin-bottom: 20px;" src="{{asset('storage/' . $cars->logo[0] )}}">
+                    <img class="col" style="width: 80px;height: 60px; border-radius: 50%;margin-bottom: 20px;" src="{{asset('storage/' . $cars->logo[0] )}}">
                 @endif
                 <input value="{{(isset($cars)) ? : ''  }}" name="logo[]" type="file" class="form-control" id="logo" multiple placeholder="logo">
             </div>
