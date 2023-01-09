@@ -3,7 +3,7 @@
     Auto Cars | Home
 @endsection
 @section('metaScript')
-    <title></title>
+            <title></title>
     <link href="{{asset('Auto%20Cars/css/bootstrap.css')}}" rel='stylesheet' type='text/css' />
     <!-- jQuery (necessary JavaScript plugins) -->
     <script src="{{asset('Auto%20Cars/js/bootstrap.js')}}"></script>
@@ -183,7 +183,7 @@
                         Etiam sit amet massa non nunc tincidunt mattis. Nunc non ex ultricies, tristique leo sed, vehicula mauris. Sed mollis tristique ligula, nec euismod dolor pharetra non.</p>
                     <p>Etiam ante diam, congue sit amet elit placerat, faucibus faucibus ipsum. Vivamus vel laoreet nulla. Aenean id bibendum diam. Donec rutrum mi diam, sed tempus metus luctus a.
                         Nullam vitae quam sed felis mattis facilisis. Nunc magna. Donec eleifend odio non neque semper eleifend. Mauris pharetra venenatis augue.</p>
-{{--                    <a href="about.html" class="hvr-bounce-to-bottom">Read More</a>--}}
+                    <a href="#" class="hvr-bounce-to-bottom">Read More</a>
                 </div>
                 <div class="col-md-6 welcome_pic">
                     <h2>Suspendisse massa pellentesque</h2>
@@ -212,7 +212,7 @@
                         Donec eleifend odio non neque semper eleifend. Mauris pharetra venenatis augue.</p>
                 </div>
                 <div class="col-md-4 auto_sec_right">
-{{--                    <p><a href="gallery.html">Donec maximus enim</a></p>--}}
+                    <p><a href="#">Donec maximus enim</a></p>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -265,7 +265,7 @@
                         <a href="#"><img src="{{asset('Auto%20Cars/images/pic6.jpg')}}" alt=""/></a>
                         <h4>Donec lacinia</h4>
                         <p>Cras pulvinar iaculis ex. Nullam vitae justo vel sapien malesuada varius ac blandit egestas nec felis. Nunc pharetra. </p>
-{{--                        <a class="more hvr-bounce-to-bottom" href="gallery.html">Read More..</a>--}}
+                        <a class="more hvr-bounce-to-bottom" href="#">Read More..</a>
                     </div>
                 </li>
                 <li>
@@ -273,7 +273,7 @@
                         <a href="#"><img src="{{asset('Auto%20Cars/images/pic5.jpg')}}" alt=""/></a>
                         <h4>Donec lacinia</h4>
                         <p>Cras pulvinar iaculis ex. Nullam vitae justo vel sapien malesuada varius ac blandit egestas nec felis. Nunc pharetra.</p>
-{{--                        <a class="more hvr-bounce-to-bottom" href="gallery.html">Read More..</a>--}}
+                        <a class="more hvr-bounce-to-bottom" href="#">Read More..</a>
                     </div>
                 </li>
                 <li>
@@ -281,7 +281,7 @@
                         <a href="#"><img src="{{asset('Auto%20Cars/images/pic8.jpg')}}" alt=""/></a>
                         <h4>Donec lacinia</h4>
                         <p>Cras pulvinar iaculis ex. Nullam vitae justo vel sapien malesuada varius ac blandit egestas nec felis. Nunc pharetra.</p>
-{{--                        <a class="more hvr-bounce-to-bottom" href="gallery.html">Read More..</a>--}}
+                        <a class="more hvr-bounce-to-bottom" href="#">Read More..</a>
                     </div>
                 </li>
                 <li>
@@ -289,7 +289,7 @@
                         <a href="#"><img src="{{asset('Auto%20Cars/images/pic4.jpg')}}" alt=""/></a>
                         <h4>Donec lacinia</h4>
                         <p>Cras pulvinar iaculis ex. Nullam vitae justo vel sapien malesuada varius ac blandit	egestas nec felis. Nunc pharetra.</p>
-{{--                        <a class="more hvr-bounce-to-bottom" href="gallery.html">Read More..</a>--}}
+                        <a class="more hvr-bounce-to-bottom" href="#">Read More..</a>
                     </div>
                 </li>
             </ul>
@@ -355,8 +355,8 @@
                     <p>It is a long established fact that a reader will be distracted by the r-
                         eadable content of a page when looking at its layout.</p>
                     <form>
-                        <input type="text" class="text" value="Enter Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter Email';}">
-                        <input type="submit" value="Subscribe"/>
+                        <input id="contents" type="text" class="text" value="Enter Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter Email';}">
+                        <input id="thenks" type="submit" value="Subscribe"/>
                     </form>
                     <div class="social">
                         <ul>
@@ -375,4 +375,13 @@
             <p>Copyright &copy; 2015 <span>Auto Cars</span> All rights reserved | Design by <a href="#">W3layouts</a></p>
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            $("#thenks").click(function () {
+                let content = $("#contents").val();
+                alert( content + ' ' +'dis your Email');
+                alert('Thank you my freands');
+            });
+        });
+    </script>
 @endsection

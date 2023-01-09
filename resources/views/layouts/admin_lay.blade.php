@@ -27,8 +27,8 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
+    @if(\Illuminate\Support\Facades\Auth::user()->role == 1)
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="@yield('logo')">
             <div class="sidebar-brand-icon rotate-n-15">
@@ -63,9 +63,8 @@
                     <h6 class="collapse-header">Login Screens:</h6>
                     <div class="collapse-divider"></div>
                     <h6 class="collapse-header">Other Pages:</h6>
-                    <a class="collapse-item" href="#">404 Page</a>
+                    <a class="collapse-item" href="{{route("errors")}}">404 Page</a>
                     <a class="collapse-item" href="@yield('my_post')#">@yield('my_poisk')</a>
-                    <a class="collapse-item active" href="blank.html">Blank Page</a>
                 </div>
             </div>
         </li>
@@ -81,7 +80,63 @@
         </div>
 
     </ul>
+    @else
+    <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
 
+                <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="@yield('logo')">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="@yield('a_teg')">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+            <hr class="sidebar-divider">
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+            <!-- Heading -->
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item active">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false"
+                   aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Pages</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages"
+                     data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Login Screens:</h6>
+                        <div class="collapse-divider"></div>
+                        <h6 class="collapse-header">Other Pages:</h6>
+                        <a class="collapse-item" href="{{route("errors")}}">404 Page</a>
+                        <a class="collapse-item" href="@yield('my_post')#">@yield('my_poisk')</a>
+                        <a class="collapse-item active" href="#">Blank Page</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Charts -->
+            <!-- Nav Item - Tables -->
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+    </ul>
+
+    @endif
 <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -99,9 +154,15 @@
                     <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
                            aria-label="Search" aria-describedby="basic-addon2">
                     <div class="input-group-append">
-                        <button class="btn btn-primary" type="button">
-                            <i class="fas fa-search fa-sm"></i>
-                        </button>
+                        @if(\Illuminate\Support\Facades\Auth::user()->role == 1)
+                            <button class="btn btn-primary" type="button">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                        @else
+                            <button class="btn btn-danger" type="button">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                        @endif
                     </div>
                 </div>
             </form>
@@ -122,7 +183,7 @@
                                        placeholder="Search for..." aria-label="Search"
                                        aria-describedby="basic-addon2">
                                 <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button">
+                                    <button class="btn btn-danger" type="button">
                                         <i class="fas fa-search fa-sm"></i>
                                     </button>
                                 </div>
@@ -146,7 +207,7 @@
                         </h6>
                         <a class="dropdown-item d-flex align-items-center" href="#">
                             <div class="mr-3">
-                                <div class="icon-circle bg-primary">
+                                <div class="icon-circle bg-danger">
                                     <i class="fas fa-file-alt text-white"></i>
                                 </div>
                             </div>
@@ -245,7 +306,8 @@
                         <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
                     </div>
                 </li>
-                <div class="topbar-divider d-none d-sm-block"></div>
+                <div style="display: flex;align-items: center">@if(\Illuminate\Support\Facades\Auth::user()->role == 1) Admin @else User @endif</div>
+                    <div class="topbar-divider d-none d-sm-block"></div>
 
                 <!-- Nav Item - User Information -->
                 <li class="nav-item dropdown no-arrow">
@@ -315,7 +377,11 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="{{route('logout')}}">Logout</a>
+                @if(\Illuminate\Support\Facades\Auth::user()->role == 1)
+                    <a class="btn btn-primary" href="{{route('logout')}}">Logout</a>
+                @else
+                    <a class="btn btn-danger" href="{{route('logout')}}">Logout</a>
+                @endif
             </div>
         </div>
     </div>

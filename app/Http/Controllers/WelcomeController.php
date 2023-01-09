@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class WelcomeController extends Controller
 {
@@ -12,9 +13,24 @@ class WelcomeController extends Controller
         return view('welcome_user.welcome');
     }
 
-    public function posts(){
-        $guest = Car::all();
-        return view("welcome_user.all_cars",compact('guest'));
+    public function posts(Request $request){
+        $cars = Car::when('car')->simplePaginate(5);
+
+        if($request->ajax())
+        {
+            $output="";
+            $products = Car::query()->where($request->brand,$request->car_brand)->get();
+
+            if($products)
+            {
+                foreach ($products as $key => $product) {
+                    $output.=
+                        '<div>'.$product->car_brand.'</div>';
+                }
+                return Response($output);
+            }
+        }
+        return view("welcome_user.all_cars",compact('cars'));
     }
 
     public function show($id)
@@ -28,13 +44,7 @@ class WelcomeController extends Controller
         return view("Auth.posts.my_post",compact('cars'));
     }
 
-    public function showCategory(Request $request){
-       $car = Car::all();
-
-       if ($request->ajax()){
-           return $request->orderBy;
-
-       }
-       return view('welcome_user.filter',['car' => $car]);
+    public function error(){
+        return view('Auth.posts.error');
     }
 }

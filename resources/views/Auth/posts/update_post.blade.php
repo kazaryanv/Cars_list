@@ -77,8 +77,8 @@
             </select>
             <br>
             <div class="mb-3">
-                <label for="many" class="form-label">many</label>
-                <input value="{{(isset($cars)) ? $cars->many : '' }}" type="text" name="many"  class="form-control" id="many" placeholder="many">
+                <label for="many" class="form-label">price</label>
+                <input value="{{(isset($cars)) ? $cars->many : '' }}" type="text" name="many"  class="form-control" id="many" placeholder="price">
             </div>
             <div class="mb-3">
                 <label for="content" class="form-label">content</label>
