@@ -18,9 +18,9 @@ class AdminSeeder extends Seeder
     {
         DB::table("users")->insert([
             'name' => "Admin",
-            'email' => 'Administrator@mail.ru',
+            'email' => 'Admin@mail.org',
             'role' => '1',
-            'password' => '$2y$10$H71mGdDeHwiSz8oReutj0.HIS6qu0Q5EyEjFYfua5GoPuCFaB9LYe',
+            'password' => '$2y$10$V9ArAre4SJYv3AdbnzOWVOeL5FPqxWGVVkj6Ars8ucy9QdngVoPZi',
             'created_at' => NOW(),
             'updated_at' => NOW()
         ]);
