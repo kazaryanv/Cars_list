@@ -26,7 +26,7 @@ class AdminRequest extends FormRequest
         return [
             'logo' => 'required|image|dimensions:min_width=100,min_height=100',
             'car_brand' => 'required',
-            'car_model' => 'required',
+            'car_model' => 'required|unique:brands',
         ];
     }
 }

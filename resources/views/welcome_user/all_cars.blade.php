@@ -247,8 +247,8 @@
                     <p>It is a long established fact that a reader will be distracted by the r-
                         eadable content of a page when looking at its layout.</p>
                     <form>
-                        <input type="text" class="text" value="Enter Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter Email';}">
-                        <input type="submit" value="Subscribe"/>
+                        <input id="contents" type="text" class="text" value="Enter Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter Email';}">
+                        <input id="thenks" type="submit" value="Subscribe"/>
                     </form>
                     <div class="social">
                         <ul>
@@ -266,4 +266,13 @@
             <p>Copyright &copy; 2015 <span>Auto Cars</span> All rights reserved | Design by <a href="#">W3layouts</a></p>
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            $("#thenks").click(function () {
+                let content = $("#contents").val();
+                alert( content + ' ' +'dis your Email');
+                alert('Thank you my freands');
+            });
+        });
+    </script>
 @endsection
