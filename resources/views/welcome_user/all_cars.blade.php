@@ -3,7 +3,6 @@
     Home
 @endsection
 @section('metaScript')
-    <title></title>
     <link href="{{asset('Auto%20Cars/css/bootstrap.css')}}" rel='stylesheet' type='text/css' />
     <script src="{{asset('Auto%20Cars/js/bootstrap.js')}}"></script>
     <link href="{{asset('Auto%20Cars/css/style.css')}}" rel='stylesheet' type='text/css' />

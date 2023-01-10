@@ -18,7 +18,7 @@ class CarsController extends Controller
      */
     public function index()
     {
-        $cars = Car::all();
+        $cars = Car::query()->when('car')->simplePaginate(5);
         return view("Auth.home", compact('cars'));
     }
 

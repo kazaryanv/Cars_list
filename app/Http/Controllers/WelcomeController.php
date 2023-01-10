@@ -40,7 +40,7 @@ class WelcomeController extends Controller
     }
 
     public function my_post(){
-        $cars = Car::get()->where('user_id',Auth::id());
+        $cars = Car::query()->when('car')->where('user_id',Auth::id())->simplePaginate(5);
         return view("Auth.posts.my_post",compact('cars'));
     }
 

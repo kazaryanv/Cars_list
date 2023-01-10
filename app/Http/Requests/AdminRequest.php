@@ -29,4 +29,11 @@ class AdminRequest extends FormRequest
             'car_model' => 'required|unique:brands',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            "car_model.unique" => "This Car Model Already Exists",
+        ];
+    }
 }

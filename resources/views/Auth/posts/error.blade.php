@@ -187,7 +187,7 @@
                     <img src="{{asset('Auto%20Cars/images/error-404.png')}}" alt="image 404" style="width: 60%">
                     <h2><b>404</b> Страница не найдена</h2>
                     <p>посетите главную страницу <br> возможно вы найдёте её</p>
-                    <a href="{{route('cars.index')}}" class="cmn-btn mt-4">На главную</a>
+                    <a href="@if(\Illuminate\Support\Facades\Auth::user()->role == 1){{route('carList.index')}}@else{{route('cars.index')}}@endif" class="cmn-btn mt-4">На главную</a>
                 </div>
             </div>
         </div>

@@ -12,7 +12,7 @@ class AdminController extends Controller
 
     public function index()
     {
-        $carList = Brand::all();
+        $carList = Brand::when('brand')->simplePaginate(5);
         return view("admin.dashboard",compact('carList'));
 
     }

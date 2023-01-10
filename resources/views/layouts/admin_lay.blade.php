@@ -8,17 +8,17 @@
     <meta name="author" content="">
     <meta name="description" content="main-page">
     <meta name="keywords" content="main">
-
     <title>@yield('title')</title>
-
     <!-- Custom fonts for this template-->
     <link href="{{asset('admin-panel/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
-    <link
-            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-            rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="{{asset('admin-panel/css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="https://bootstraptema.ru/plugins/jquery/jquery-1.11.3.min.js"></script>
 </head>
 <body id="page-top">
 
@@ -88,7 +88,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">SB Users <sup>{{\Illuminate\Support\Facades\Auth::id()}}</sup></div>
             </a>
 
             <!-- Divider -->
@@ -151,19 +151,7 @@
             <form
                     class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                 <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                           aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                        @if(\Illuminate\Support\Facades\Auth::user()->role == 1)
-                            <button class="btn btn-primary" type="button">
-                                <i class="fas fa-search fa-sm"></i>
-                            </button>
-                        @else
-                            <button class="btn btn-danger" type="button">
-                                <i class="fas fa-search fa-sm"></i>
-                            </button>
-                        @endif
-                    </div>
+                    @yield('search')
                 </div>
             </form>
             <!-- Topbar Navbar -->
@@ -192,7 +180,7 @@
                     </div>
                 </li>
                 <!-- Nav Item - Alerts -->
-                <li class="nav-item dropdown no-arrow mx-1">
+                <li class="nav-item dropdown no-arrow mx-1 d-none">
                     <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-bell fa-fw"></i>
@@ -242,7 +230,7 @@
                     </div>
                 </li>
                 <!-- Nav Item - Messages -->
-                <li class="nav-item dropdown no-arrow mx-1">
+                <li class="nav-item dropdown no-arrow mx-1 d-none">
                     <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-envelope fa-fw"></i>
@@ -318,15 +306,15 @@
                     <!-- Dropdown - User Information -->
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                          aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item d-none" href="#">
                             <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                             Profile
                         </a>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item d-none" href="#">
                             <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                             Settings
                         </a>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item d-none" href="#">
                             <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                             Activity Log
                         </a>
