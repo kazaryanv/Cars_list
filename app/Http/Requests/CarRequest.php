@@ -40,9 +40,11 @@ class CarRequest extends FormRequest
     }
     public function messages()
     {
-        return [
-            "logo.max" => "file can't be more than 10.",
-            "logo.required" => "file can't be more than 1.",
-        ];
+        if (request()->isMethod('POST')){
+            return [
+                "logo.max" => "file can't be more than 10.",
+                "logo.required" => "file can't be more than 1.",
+            ];
+        }
     }
 }
