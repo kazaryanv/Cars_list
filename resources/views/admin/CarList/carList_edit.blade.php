@@ -46,15 +46,37 @@
                 <input  value="{{(isset($carList)) ? $carList->car_model : '' }}" type="text" name="car_model"  class="form-control" id="car_model" placeholder="car_model">
             </div>
             @if(isset($carList))
-                <button class="btn btn-primary">
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalCenter">
                     Update
                 </button>
-                <a href="{{ route('carList.show', $carList->id) }}">Back</a>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">entry</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div style="cursor: default"  class="modal-body">
+                                Are you sure you want to Update this entry?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">No</button>
+                                <button type="submit" class="btn btn-success btn-block">
+                                    Yes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="btn btn-outline-secondary" href="{{ route('carList.index') }}">Back</a>
             @else
                 <button class="btn btn-primary">
                     Save
                 </button>
-                <a href="{{ route('carList.index') }}">Back</a>
+                <a class="btn btn-outline-secondary" href="{{ route('carList.index') }}">Back</a>
             @endif
 
         </form>

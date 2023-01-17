@@ -27,7 +27,7 @@ class AdminCarUpdateRequest extends FormRequest
         return [
             'logo' => 'sometimes|image|dimensions:min_width=100,min_height=100|nullable',
             'car_brand' => 'sometimes',
-            'car_model' => 'sometimes|unique:brands,car_model',
+            'car_model' => 'sometimes|nullable',
         ];
     }
 }

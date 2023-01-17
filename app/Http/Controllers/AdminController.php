@@ -86,12 +86,11 @@ class AdminController extends Controller
         $delete =  Brand::query()->findOrFail($id);
         try{
             $file_name = $delete->logo;
-            $file_path = public_path('storage/'.$file_name);
-            unlink($file_path);
+            Storage::disk('public')->delete($file_name);
         }catch (\Throwable $e){
 
         }
-        $delete->delete();
+
         if($delete->delete()) {
             return redirect()->route('carList.index')->with('success','Deleted successfully');
         } else {
