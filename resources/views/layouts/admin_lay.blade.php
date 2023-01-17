@@ -63,8 +63,7 @@
                     <h6 class="collapse-header">Login Screens:</h6>
                     <div class="collapse-divider"></div>
                     <h6 class="collapse-header">Other Pages:</h6>
-                    <a class="collapse-item" href="{{route("errors")}}">404 Page</a>
-                    <a class="collapse-item" href="@yield('my_post')#">@yield('my_poisk')</a>
+                    <a class="collapse-item" href="{{route("cars")}}">All Cars</a>
                 </div>
             </div>
         </li>
@@ -114,12 +113,9 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages"
                      data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="{{route("errors")}}">404 Page</a>
-                        <a class="collapse-item" href="@yield('my_post')#">@yield('my_poisk')</a>
-                        <a class="collapse-item active" href="#">Blank Page</a>
+                        <a class="collapse-item" href="{{route("cars")}}">All Cars</a>
                     </div>
                 </div>
             </li>
@@ -294,7 +290,8 @@
                         <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
                     </div>
                 </li>
-                <div style="display: flex;align-items: center">@if(\Illuminate\Support\Facades\Auth::user()->role == 1) Admin @else User @endif</div>
+
+                <div style="display: flex;align-items: center">@if(\Illuminate\Support\Facades\Auth::user()->role == 1)AdminName:{{\Illuminate\Support\Facades\Auth::user()->name}} @else UserName:{{\Illuminate\Support\Facades\Auth::user()->name}}@endif</div>
                     <div class="topbar-divider d-none d-sm-block"></div>
 
                 <!-- Nav Item - User Information -->

@@ -30,7 +30,6 @@ class AuthController extends Controller
 
     public function register_view() {
         return view("Auth.register");
-
     }
 
     public function register(AuthRequest $request) {

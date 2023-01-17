@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AdminCarUpdateRequest;
 use App\Http\Requests\AdminRequest;
 use App\Models\Brand;
 use Illuminate\Http\Request;
@@ -54,7 +55,7 @@ class AdminController extends Controller
     }
 
 
-    public function update(AdminRequest $request, $id)
+    public function update(AdminCarUpdateRequest $request, $id)
     {
         $cars = Brand::query()->findOrFail($id);
         $cars->car_brand = $request->input('logo');

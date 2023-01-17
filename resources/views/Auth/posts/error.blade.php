@@ -1,10 +1,11 @@
-@extends('layouts.default')
-@section('title')
-    Error
-@endsection
-@section('content')
-
-
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Error</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cosmotema 404 - 404 | page not found</title>
@@ -174,24 +175,24 @@
             font-size: 18px;
         }
     </style>
-
-
-
-
-
-
-    <div class="error">
-        <div class="container">
+</head>
+<body>
+<div class="error">
+    <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7 text-center">
                     <img src="{{asset('Auto%20Cars/images/error-404.png')}}" alt="image 404" style="width: 60%">
                     <h2><b>404</b> Страница не найдена</h2>
-                    <p>посетите главную страницу <br> возможно вы найдёте её</p>
-                    <a href="@if(\Illuminate\Support\Facades\Auth::user()->role == 1){{route('carList.index')}}@else{{route('cars.index')}}@endif" class="cmn-btn mt-4">На главную</a>
+                        <p>посетите главную страницу <br> возможно вы найдёте её</p>
+                    @auth
+                        <a href="@if(\Illuminate\Support\Facades\Auth::user()->role == 1){{route('carList.index')}}@else{{route('cars.index')}}@endif" class="cmn-btn mt-4">На главную</a>
+                    @endauth
+                    @guest
+                        <a href="{{route('welcome')}}" class="cmn-btn mt-4">На главную</a>
+                    @endguest
                 </div>
             </div>
-        </div>
     </div>
-
-
-@endsection
+</div>
+</body>
+</html>

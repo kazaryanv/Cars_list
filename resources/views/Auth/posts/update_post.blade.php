@@ -1,19 +1,22 @@
-@extends('layouts.admin_lay')
+@extends('layouts.about')
 @section('title')
-    @if(isset($car))
+    @if(isset($cars))
         Edit Cars
     @else
         New Cars
     @endif
 @endsection
-@section('my_post')
-    {{route('myPosts')}}
-@endsection
-@section('my_poisk')
-    MY POST
+@section('metaScript')
+    <link href="{{asset('Auto%20Cars/css/bootstrap.css')}}" rel='stylesheet' type='text/css' />
+    <!-- jQuery (necessary JavaScript plugins) -->
+    <script src="{{asset('Auto%20Cars/js/bootstrap.js')}}"></script>
+    <link href="{{asset('Auto%20Cars/css/style.css')}}" rel='stylesheet' type='text/css' />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="{{asset('Auto%20Cars/js/jquery.min.js')}}"></script>
+    <script src="{{asset('Auto%20Cars/js/responsiveslides.min.js')}}"></script>
 @endsection
 @section('content')
-
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -23,9 +26,11 @@
             </ul>
         </div>
     @endif
+<div style="width: 100%;height: auto">
     <div class="container">
+        <div class="form-row mb-5 pb-5 mt-5 pt-5">
         @if(isset($cars))
-            Update Cars List
+            <h2>Update Cars List</h2>
         @else
             <h2>Create new Cars List</h2>
         @endif
@@ -82,20 +87,45 @@
             </div>
             <div class="mb-3">
                 <label for="content" class="form-label">content</label>
-                <input value="{{(isset($cars)) ? $cars->content : '' }}" type="text" name="content"  class="form-control" id="content" placeholder="content">
+                <textarea name="content"  class="form-control" id="content" placeholder="content">
+                    {{(isset($cars)) ? $cars->content : '' }}
+                </textarea>
             </div>
-            @if(isset($car))
-                <button class="btn btn-primary">
+            @if(isset($cars))
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
                     Update
                 </button>
-                <a href="{{ route('cars.show', $cars->id) }}">Back</a>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">entry</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div style="cursor: default"  class="modal-body">
+                                Are you sure you want to Update this entry?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">No</button>
+                                <button type="submit" class="btn btn-danger btn-block">
+                                    Yes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="{{ route('cars.index') }}">Go Back Home</a>
             @else
-                <button class="btn btn-primary">
+                <button class="btn btn-success">
                     Save
                 </button>
                 <a href="{{ route('cars.index') }}">Back</a>
             @endif
-
         </form>
+        </div>
     </div>
+</div>
 @endsection

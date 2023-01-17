@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use App\Models\Car;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,20 +14,19 @@ class WelcomeController extends Controller
         return view('welcome_user.welcome');
     }
 
-    public function posts(Request $request){
-        $cars = Car::when('car')->simplePaginate(5);
+    public function cars(Request $request){
+        $filterBrands = $request->get('car_brand',[]);
+        $cars = Car::query()->when(!empty($filterBrands), function ($query) use ($filterBrands){
+            $query->whereIn('car_brand',$filterBrands);
+        })->get();
 
         if($request->ajax())
         {
             $output="";
-            $products = Car::query()->where($request->brand,$request->car_brand)->get();
-
-            if($products)
+            if($cars)
             {
-                foreach ($products as $key => $product) {
-                    $output.=
-                        '<div>'.$product->car_brand.'</div>';
-                }
+                foreach ($cars as $car)
+                $output .=  view('welcome_user.filter',['car' => $car]);
                 return Response($output);
             }
         }
@@ -35,13 +35,8 @@ class WelcomeController extends Controller
 
     public function show($id)
     {
-        $car = new Car();
-        return view('welcome_user.one_id', ['car'=>$car->findOrFail($id)]);
-    }
-
-    public function my_post(){
-        $cars = Car::query()->when('car')->where('user_id',Auth::id())->simplePaginate(5);
-        return view("Auth.posts.my_post",compact('cars'));
+        $car = Car::query()->findOrFail($id);
+        return view('welcome_user.one_id', compact('car'));
     }
 
     public function error(){

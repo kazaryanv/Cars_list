@@ -18,8 +18,6 @@ return new class extends Migration
             $table->string('logo');
             $table->string('car_brand');
             $table->string('car_model')->unique();
-            $table->unsignedBigInteger('car_id')->nullable();;
-            $table->foreign('car_id')->references('id')->on('cars');
             $table->timestamps();
         });
     }

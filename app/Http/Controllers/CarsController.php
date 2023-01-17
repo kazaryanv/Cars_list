@@ -18,7 +18,7 @@ class CarsController extends Controller
      */
     public function index()
     {
-        $cars = Car::query()->when('car')->simplePaginate(5);
+        $cars = Car::query()->where('user_id',Auth::id())->simplePaginate(5);
         return view("Auth.home", compact('cars'));
     }
 
@@ -41,7 +41,6 @@ class CarsController extends Controller
      */
     public function store(CarRequest $request)
     {
-
         $paths = [];
         if ($request->hasFile('logo')) {
             foreach ($request->file('logo') as $index => $item) {
@@ -88,7 +87,6 @@ class CarsController extends Controller
     public function edit(Car $car)
     {
         return view('Auth.posts.update_post',['cars'=> $car]);
-
     }
 
     /**
@@ -101,6 +99,7 @@ class CarsController extends Controller
     public function update(CarRequest $request,$id)
     {
         $cars = Car::query()->findOrFail($id);
+
         $cars->car_brand = $request->input('logo[]');
         $cars->car_brand = $request->input('car_brand');
         $cars->car_model = $request->input('car_model');
@@ -119,11 +118,6 @@ class CarsController extends Controller
                 foreach ($request->file('logo') as $index => $item) {
                     $paths[] = $request->logo[$index]->store('post', 'public');
                 }
-//            $file = $request->file('logo');
-//            $extension = $request->logo->getClientOriginalExtension();
-//            $fileName = uniqid() . '.' . $extension;
-//            $file->move(public_path().'/storage/',$fileName);
-//            $data = $fileName;
             $cars->logo = $paths;
             }
             if ($cars->save()) {
@@ -148,7 +142,6 @@ class CarsController extends Controller
                $file_path = public_path('storage/'. $index);
                unlink($file_path);
           }
-        $delete->delete();
         if($delete->delete()) {
             return redirect()->route('cars.index')->with('success','Deleted successfully');
         } else {

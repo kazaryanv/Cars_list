@@ -24,19 +24,25 @@ class CarRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'logo' => 'max:10|min:2|required',
-            'car_brand' => 'required',
-            'car_model' => 'required',
-            'many' => 'required',
-        ];
-
+       return request()->isMethod('PUT') ? [
+           'logo' => 'sometimes|nullable|min:1|max:10',
+           'car_brand' => 'sometimes|nullable',
+           'car_model' => 'sometimes|nullable',
+           'many' => 'sometimes|nullable',
+           'content' => 'sometimes|nullable',
+       ] : [
+           'logo' => 'required|max:10',
+           'car_brand' =>  'required',
+           'car_model' => 'required',
+           'many' => 'required|integer',
+           'content' => 'required',
+       ];
     }
     public function messages()
     {
         return [
             "logo.max" => "file can't be more than 10.",
-            "logo.min" => "file can't be more than 2.",
+            "logo.required" => "file can't be more than 1.",
         ];
     }
 }

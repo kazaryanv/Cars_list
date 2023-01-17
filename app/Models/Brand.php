@@ -12,7 +12,7 @@ class Brand extends Model
         'logo',
         'car_brand',
         'car_model',
-        'car_id',
+//        'car_id',
     ];
     public function Car()
     {

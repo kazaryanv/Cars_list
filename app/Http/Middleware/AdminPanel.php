@@ -5,6 +5,8 @@ namespace App\Http\Middleware;
 use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use function Symfony\Component\Finder\name;
 
 class AdminPanel
 {
@@ -18,9 +20,9 @@ class AdminPanel
 
     public function handle(Request $request, Closure $next)
     {
-        if (\Auth::user()->role == 1){
-            return $next($request);
-        }
-        return redirect()->route('cars.index');
+            if (\Auth::user()->role == 1){
+                return $next($request);
+            }
+            return redirect()->route('cars.index');
     }
 }

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('car_years');
             $table->string('car_Engine_capacity');
             $table->string('car_Transmission');
-            $table->string('many');
+            $table->integer('many')->nullable();
             $table->string('content');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
