@@ -185,7 +185,7 @@
                     <h2><b>404</b> Страница не найдена</h2>
                         <p>посетите главную страницу <br> возможно вы найдёте её</p>
                     @auth
-                        <a href="@if(\Illuminate\Support\Facades\Auth::user()->role == 1){{route('carList.index')}}@else{{route('cars.index')}}@endif" class="cmn-btn mt-4">На главную</a>
+                        <a href="@if(\Illuminate\Support\Facades\Auth::user()->isAdmin()){{route('carList.index')}}@else{{route('cars.index')}}@endif" class="cmn-btn mt-4">На главную</a>
                     @endauth
                     @guest
                         <a href="{{route('welcome')}}" class="cmn-btn mt-4">На главную</a>

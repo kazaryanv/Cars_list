@@ -55,7 +55,7 @@ class AdminController extends Controller
     }
 
 
-    public function update(AdminCarUpdateRequest $request, $id)
+    public function update(AdminRequest $request, $id)
     {
         $cars = Brand::query()->findOrFail($id);
         $cars->car_brand = $request->input('logo');

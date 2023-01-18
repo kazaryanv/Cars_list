@@ -23,15 +23,15 @@
                     <div class="container" style="display: flex;justify-content: space-between">
                       <div style="padding-right: 20px;margin-right: 10px;">
                           <form id="brandsForm">
-                              @foreach($cars as $row)
+                              @foreach(\App\Models\Brand::all()  as $row)
                                   <div class="form-check form-switch">
-                                      <input class="form-check-input car_brands" id="car_brands_{{$row->id}}" type="checkbox" value="{{$row->car_brand}}">
+                                      <input class="form-check-input car_brands" name="car_brand[]" id="car_brands_{{$row->id}}" type="checkbox" value="{{$row->car_brand}}">
                                       <label class="form-check-label" for="car_brands_{{$row->id}}">
                                           {{$row->car_brand}}
                                       </label>
                                   </div>
                               @endforeach
-                                  <button type="submit">Search</button>
+                              <button type="submit">Search</button>
                           </form>
                       </div>
                         <div style="width: 1000px" id="cars" class="row list-group d-flex justify-content-center align-items-center flex-wrap">
@@ -67,6 +67,7 @@
                 </div>
                 <script>
                     $(document).ready(function() {
+                        $('.dropdown-menu').dropdown();
                         $("#myInput").on("keyup", function () {
                             let value = $(this).val().toLowerCase();
                             $("#myTable ").filter(function () {
@@ -77,16 +78,16 @@
                         $("#brandsForm").on('submit', function (event) {
                             event.preventDefault();
                             let car_brand = $(this).data();
+                            console.log($(this).serialize());
                             $.ajax({
                                 url: "{{route('cars')}}",
                                 type:"GET",
                                 headers: {
                                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                 },
-                                data: $(this).serialize(car_brand),
+                                data: $(this).serialize(),
                                 success: (data) => {
                                     $('#cars').html(data);
-                                    console.log(data)
                                 },
                             });
                         });

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\DB;
 
 class AdminRequest extends FormRequest
 {
@@ -23,7 +24,11 @@ class AdminRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        return $this->isMethod('PUT') ? [
+            'logo' => 'sometimes|image|dimensions:min_width=100,min_height=100|nullable',
+            'car_brand' => 'sometimes|nullable',
+            'car_model' => 'sometimes|nullable',
+        ] : [
             'logo' => 'required|image|dimensions:min_width=100,min_height=100',
             'car_brand' => 'required',
             'car_model' => 'required|unique:brands',

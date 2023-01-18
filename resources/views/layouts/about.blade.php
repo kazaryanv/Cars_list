@@ -28,7 +28,7 @@
                 <h1><a href="{{route('welcome')}}"><img src="{{asset('Auto%20Cars/images/car.png')}}" alt=""/>AUTO <span>CARS</span></a></h1>
             </div>
             <div class="clearfix"></div>
-            @auth
+            @auth('web')
                 <div class="d-flex align-items-center justify-content-end">
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Register">
                         Logout
@@ -52,9 +52,12 @@
                             </div>
                         </div>
                     </div>
-                    @if(\Illuminate\Support\Facades\Auth::user()->role == 1)
+                    @if(\Illuminate\Support\Facades\Auth::user()->isAdmin())
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Login" style="margin-left: 10px">
-                            <a style="text-decoration: none;color: white;" href="{{route('carList.index')}}">My Posts</a>
+                            <a style="text-decoration: none;color: white;" href="{{route('carList.index')}}">Admin</a>
+                        </button>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Login" style="margin-left: 10px">
+                            <a style="text-decoration: none;color: white;" href="{{route('cars.index')}}">My Posts</a>
                         </button>
                     @else
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Login" style="margin-left: 10px">

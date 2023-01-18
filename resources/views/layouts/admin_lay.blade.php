@@ -27,7 +27,7 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
-    @if(\Illuminate\Support\Facades\Auth::user()->role == 1)
+    @if(\Illuminate\Support\Facades\Auth::user()->isAdmin())
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="@yield('logo')">
@@ -61,6 +61,7 @@
                  data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Login Screens:</h6>
+                    <a class="collapse-item" href="{{route("cars.index")}}">My Pages</a>
                     <div class="collapse-divider"></div>
                     <h6 class="collapse-header">Other Pages:</h6>
                     <a class="collapse-item" href="{{route("cars")}}">All Cars</a>
@@ -291,7 +292,7 @@
                     </div>
                 </li>
 
-                <div style="display: flex;align-items: center">@if(\Illuminate\Support\Facades\Auth::user()->role == 1)AdminName:{{\Illuminate\Support\Facades\Auth::user()->name}} @else UserName:{{\Illuminate\Support\Facades\Auth::user()->name}}@endif</div>
+                <div style="display: flex;align-items: center">@if(\Illuminate\Support\Facades\Auth::user()->isAdmin())AdminName:{{\Illuminate\Support\Facades\Auth::user()->name}} @else UserName:{{\Illuminate\Support\Facades\Auth::user()->name}}@endif</div>
                     <div class="topbar-divider d-none d-sm-block"></div>
 
                 <!-- Nav Item - User Information -->
@@ -362,7 +363,7 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                @if(\Illuminate\Support\Facades\Auth::user()->role == 1)
+                @if(\Illuminate\Support\Facades\Auth::user()->isAdmin())
                     <a class="btn btn-primary" href="{{route('logout')}}">Logout</a>
                 @else
                     <a class="btn btn-danger" href="{{route('logout')}}">Logout</a>

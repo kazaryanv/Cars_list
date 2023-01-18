@@ -44,7 +44,7 @@
                                     </div>
                                 </div>
                             </div>
-                            @if(\Illuminate\Support\Facades\Auth::user()->role == 1)
+                            @if(\Illuminate\Support\Facades\Auth::user()->isAdmin())
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Login" style="margin-left: 10px">
                                 <a style="text-decoration: none;color: white;" href="{{route('carList.index')}}">My Posts</a>
                             </button>

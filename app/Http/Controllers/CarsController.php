@@ -33,19 +33,13 @@ class CarsController extends Controller
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(CarRequest $request)
     {
         $paths = [];
         if ($request->hasFile('logo')) {
             foreach ($request->file('logo') as $index => $item) {
                 $paths[]= $request->logo[$index]->store('post','public');
-            }
+            }}
             $userId = Auth::check() ? Auth::id() : abort(404);
             $store = Car::create([
                 'user_id' => $userId,
@@ -58,44 +52,29 @@ class CarsController extends Controller
                 'many'=>$request->many,
                 'content' => $request['content'],
             ]);
-            if ($store) {
+
+            if (isset($store)) {
                 return redirect()->route('cars.index')->with('success', 'Post created successfully');
             } else {
                 return redirect()->route(back())->with('fail', 'fail');
             }
 
-        }
+
     }
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Car  $car
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Car $car)
     {
         return view('Auth.posts.one_post',['car'=> $car]);
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Car  $car
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Car $car)
     {
         return view('Auth.posts.update_post',['cars'=> $car]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Car  $car
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(CarRequest $request,$id)
     {
         $cars = Car::query()->findOrFail($id);
@@ -105,6 +84,7 @@ class CarsController extends Controller
         $cars->car_model = $request->input('car_model');
         $cars->car_years = $request->input('car_years');
         $cars->car_Engine_capacity = $request->input('car_Engine_capacity');
+        $cars->content = $request->input('content');
 
         if ($request->hasfile('logo')) {
             if ($logo = $cars->logo) {
@@ -120,12 +100,12 @@ class CarsController extends Controller
                 }
             $cars->logo = $paths;
             }
+        }
             if ($cars->save()) {
                 return redirect()->route('cars.index')->with('success', 'Row successfully created');
             } else {
                 return redirect()->route(back())->with('fail', 'fail');
             }
-        }
     }
 
     /**
